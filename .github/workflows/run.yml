@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas requests
+          pip install pandas requests beautifulsoup4
 
       - name: Run script
         run: python scrape.py
