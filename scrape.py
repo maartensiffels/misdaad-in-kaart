@@ -1,4 +1,4 @@
-!pip install beautifulsoup4
+pip install beautifulsoup4
 froms bs4 import BeautifulSoup
 import requests
 import time
