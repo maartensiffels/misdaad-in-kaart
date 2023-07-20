@@ -1,4 +1,4 @@
-import BeautifulSoup
+import beautifulsoup
 import requests
 import time
 import datetime
