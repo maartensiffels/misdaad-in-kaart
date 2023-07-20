@@ -1,0 +1,73 @@
+name: Run Python script
+
+on:
+  #push:
+  workflow_dispatch:
+  schedule:
+    # Draait elke uur
+    - cron: '0 0 * * 1'
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install pandas requests
+
+      - name: Run script
+        run: python scrape.py
+
+      - name: List files in current directory
+        run: ls -l
+
+      - run: |-
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@users.noreply.github.com'
+          git pull
+          git add -A
+          git commit -m 'Updates' || exit 0
+          git push
+
+  retry:
+    needs: build
+    if: ${{ needs.build.result == 'failure' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install pandas requests
+
+      - name: Run script
+        run: python scrape.py
+
+      - name: List files in current directory
+        run: ls -l
+
+      - run: |-
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@users.noreply.github.com'
+          git pull
+          git add -A
+          git commit -m 'Updates' || exit 0
+          git push
