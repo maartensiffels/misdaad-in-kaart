@@ -4,7 +4,7 @@ on:
   #push:
   workflow_dispatch:
   schedule:
-    # Draait elke uur
+    # Draait elke week op maandag
     - cron: '0 0 * * 1'
 
 permissions: write-all
