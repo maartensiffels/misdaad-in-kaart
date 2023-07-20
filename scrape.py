@@ -1,5 +1,5 @@
-!pip install beautifulsoup4
-from bs4 import BeautifulSoup
+#!pip install beautifulsoup4
+from bs4 import beautifulsoup
 import requests
 import time
 import datetime
